@@ -10,10 +10,10 @@ entity IP is
         m_out   : in std_logic_vector(31 downto 0); --this comes from the memory (PM)
         
         IR_AM   : out std_logic_vector(1 downto 0);     --Addressing mode bits, connected to operation decoder in Control Unit
-        IR_Opcode   : out std_logic_vector(1 downto 0); -- OpCode bits, connected to operation decoder in Control Unit
-        IR_Rz   : out std_logic_vector(1 downto 0);     -- connected to sel_z input of Register File Mux
-        IR_Rx   : out std_logic_vector(1 downto 0);     -- connected to sel_x input of Register File Mux
-        IR_Op   : out std_logic_vector(1 downto 0)      -- loaded in the decode state only if the fetched instruction is using an operand
+        IR_Opcode   : out std_logic_vector(5 downto 0); -- OpCode bits, connected to operation decoder in Control Unit
+        IR_Rz   : out std_logic_vector(3 downto 0);     -- connected to sel_z input of Register File Mux
+        IR_Rx   : out std_logic_vector(3 downto 0);     -- connected to sel_x input of Register File Mux
+        IR_Op   : out std_logic_vector(15 downto 0)      -- loaded in the decode state only if the fetched instruction is using an operand
     );
 
 end entity;
