@@ -4,15 +4,16 @@
 
 ### Data Path
 
-* [ ] Program Counter Block
-* [ ] Instruction Register Block
-* [ ] ALU
-* [ ] Memory Interface Block
+* [ ] Program Counter Block: Tim
+* [ ] Instruction Register Block: Rufaro
+* [ ] Register File Block: Euan
+* [ ] ALU:
+* [ ] Memory Interface Block: Euan
 
 ### Control Unit
 
-* [ ] Operation Decoder
-* [ ] Pulse Distributor
+* [ ] Operation Decoder:
+* [ ] Pulse Distributor:
 
 ### Memory
 
