@@ -65,11 +65,11 @@ begin
         wait for 20 ns;
 
         -- Retrieve instructions from program memory
-        pc_tb <= "0000000000000100";
+        pc_tb <= "0000000000000000";
         wait for 20 ns;
 
-        pc_tb <= "0000000000001000";
-        wait for 20 ns;
+        pc_tb <= "0000000000000001";
+        wait for 40 ns;
 
         -- Store data in data memory
         mem_sel_tb <= '1';
