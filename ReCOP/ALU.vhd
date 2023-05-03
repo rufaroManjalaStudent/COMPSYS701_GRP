@@ -5,14 +5,35 @@ use ieee.numeric_std.all;
 
 
 entity ALU is 
+
+    generic (
+        --generics for opcode
+        ADD_opcode : bit_vector := "111000";
+        SUB_opcode : bit_vector := "000100";
+        SUBV_opcode: bit_vector := "000011";
+        AND_opcode : bit_vector := "001000";
+        OR_opcode  : bit_vector := "001100";
+
+        In_addm    : bit_vector := "00";
+        Im_addm    : bit_vector := "01";
+        Dir_addm   : bit_vector := "10";
+        Reg_addm   : bit_vector := "11"
+        
+    );
+
     port(
+        
+        
+    
         ALU_Rx      : in std_logic_vector(3 downto 0);  --Rx from instruction
         ALU_IR      : in std_logic_vector(15 downto 0); --Operand from the Instruction
         ALU_Flmr    : in std_logic_vector(31 downto 0);  --FIFO last memory location value
         ALU_Rz      : in std_logic_vector(3 downto 0);  --Rz from instruction
         cin         : in std_logic; --carry input
-        ALU_CU_Mux  : in std_logic_vector(5 downto 0); --control signal for knowing which two values will pass through Muxes. Each bit represents an input option across the two muxes. Only 2 bits should ever be set high
-        ALU_op      : in std_logic_vector(2 downto 0); --control signal for what kind of operation is to be done
+        ALU_Opcode  : in std_logic_vector(2 downto 0); --control signal for what kind of operation is to be done
+        ALU_addm    : in std_logic_vector( 1 downto 0); --from IR, what kind of addressing to know which of the mux inputs to allow
+
+        --clk         : in std_logic Don't think ALU needs clock as it is an asynchronous tool
 
 
         ALU_out     : out std_logic_vector(15 downto 0);
@@ -32,22 +53,22 @@ architecture behaviour of ALU is
 
         --**Mux stage of ALU**
 
-        --Layout of ALU_CU_Mux -> [rx][ir_hold]["1"][flmr] [rx][rz]. 1 means that will be passed through. 2 lsb are for mux 2
-        ALU_in1 <=  ALU_Rx when (ALU_CU_Mux(5) = 1) else
-                    ALU_IR when (ALU_CU_Mux(4) = 1) else
-                    000001 when (ALU_CU_Mux(3) = 1) else
+        ALU_in1 <=  ALU_Rx when (ALU_addm = "11"') else
+                    ALU_IR when (ALU_addm = "01") else
+                    000001 when (ALU_addm = "00") else --assuming inherent data type for this 
                     ALU_Flmr;
 
-        ALU_in2 <=  ALU_Rx when (ALU_CU_Mux(1) = 1) else
+        ALU_in2 <=  ALU_Rx when (ALU_addm = "01") else --if immediate addressing type, operand will be operated with Rz
                     ALU_Rz;
 
         --**ALU stage**
         --TODO: need to confirm where to put cin
-        ALU_out <=  (ALU_in1 + ALU_in2) when (ALU_op = 00) else
-                    (ALU_in1 + ALU_in2) when (ALU_op = 01) else
-                    (ALU_in1 or ALU_in2) when (ALU_op = 10) else
-                    (ALU_in1 and ALU_in2);
+        ALU_out <=  (ALU_in1 + ALU_in2) when (ALU_Opcode = ADD_opcode) else
+                    (ALU_in1 - ALU_in2) when (ALU_Opcode = SUB_opcode or SUBV_opcode) else
+                    (ALU_in1 or ALU_in2) when (ALU_Opcode = OR_opcode) else --there is sub and subv as possible opcodes for instructions
+                    (ALU_in1 and ALU_in2) when (ALU_Opcode = AND_opcode) else
+                    "1111111111"; -- error value
 
-        zout <= 0 and ALU_out; -- will be sent as a flag when the output = 0
+        zout <= 0 and ALU_out; -- will be a flag when the output = 0
 
 end architecture;
