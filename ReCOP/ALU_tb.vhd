@@ -34,8 +34,6 @@ architecture sim of ALU_tb is
     signal t_ALU_out     :  std_logic_vector(15 downto 0);
     signal t_zout        :  std_logic;  --control signal connects to operational decoder
 
-    constant clk_period : time := 10;
-
     component ALU
         port(    
         ALU_Rx      : in std_logic_vector(3 downto 0);  --Rx from instruction
