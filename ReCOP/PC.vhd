@@ -9,7 +9,7 @@ entity PC is
 		-- Program counter inputs
 		clk				: in std_logic;
 		reset				: in std_logic;
-		enable			: in std_logic;
+		
 		-- Multiplexer inputs
 		m_out				: in std_logic_vector(15 downto 0);	
 		rx					: in std_logic_vector(15 downto 0);
@@ -29,39 +29,29 @@ end entity PC;
 
 architecture behaviour of PC is
 	-- Signal Declaration
-	signal counter : std_logic_vector(15 downto 0);
-	signal pc_in : std_logic_vector(15 downto 0);
-	signal adder_in : std_logic_vector(15 downto 0);
-	
-
-	begin
-
-	process(clk)
+	signal pc_reg : std_logic_vector(15 downto 0) := (others => '0');
+begin
+	process (clk)
   	begin
 		-- Program Counter
     	if rising_edge(clk) then
       		if reset = '1' then
-        		counter <= X"0000";
-      		elsif enable = '1' then
-        		counter <= pc_in;
-					-- When control signal is 1, program counter increments (execute, fetch , decode)
-					if pc_control_sig = '1' then
-						counter <= pc_in + 1;
+					pc_reg <= X"0000";
+				else
+					if (pc_control_sig = '1') then
+						case mux_select is
+							when "00" => pc_reg <= m_out;
+							when "01" => pc_reg <= rx;
+							when "10" => pc_reg <= ir_hold;
+							when "11" => pc_reg <= std_logic_vector(unsigned(pc_reg) + 1);
+							when others =>
+						end case;
 					end if;
-      		end if;
+				end if;
 				
+				pc_hold <= pc_reg;
 				
     	end if;
-	
  	end process;
-	
-	-- Program counter (PC) input Multiplexer
-	pc_in <= m_out when (mux_select = "00") else
-			rx when (mux_select = "01") else
-			ir_hold when (mux_select = "10") else
-			adder_in;
-			
-	pc_hold <= counter;
-	
 
 end behaviour;

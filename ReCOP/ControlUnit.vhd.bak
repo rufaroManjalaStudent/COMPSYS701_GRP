@@ -6,10 +6,7 @@ use ieee.std_logic_unsigned.all;
 entity ControlUnit is
 	port (
 		clk : in std_logic;
-		reset : in std_logic;
-		
-		pc_control_sig : out std_logic;
-		pc_mux_select : out std_logic_vector(1 downto 0)
+		reset : in std_logic
 	);
 end entity ControlUnit;
 
@@ -59,13 +56,8 @@ begin
 		case state is
 			when T0 =>
 				next_state <= T1;
-				pc_control_sig <= '1';
-				pc_mux_select <= "11";
 			when T1 =>	
-				next_state <= T2;
-				pc_control_sig <= '0';
 			when T2 =>
-				next_state <= T0;
 		end case;
 	end process opdecoder;
 
