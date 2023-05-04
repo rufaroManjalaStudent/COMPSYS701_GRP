@@ -6,7 +6,7 @@ entity memory_interface_tb is
 end entity memory_interface_tb;
 
 architecture sim of memory_interface_tb is
-    signal clock_tb : std_logic := '0';
+    signal clock_tb : std_logic := '1';
     signal pc_tb : std_logic_vector(15 downto 0) := (others => '0');
     signal rx_tb : std_logic_vector(15 downto 0) := (others => '0');
     signal rz_tb : std_logic_vector(15 downto 0) := (others => '0');
@@ -16,6 +16,7 @@ architecture sim of memory_interface_tb is
     signal mem_sel_tb : std_logic := 'X';
     signal program_memory_tb : std_logic_vector(15 downto 0);
     signal data_memory_tb : std_logic_vector(15 downto 0);
+	 signal wren_b_tb : std_logic := '0';
 
     component memory_interface
         port (
@@ -27,6 +28,7 @@ architecture sim of memory_interface_tb is
             data_in_control : in std_logic;
             address_control : in std_logic_vector(1 downto 0);
             mem_sel : in std_logic;
+				wren_b : in std_logic;
             program_memory : out std_logic_vector(15 downto 0);
             data_memory : out std_logic_vector(15 downto 0)
         );
@@ -44,6 +46,7 @@ begin
             data_in_control => data_in_control_tb,
             address_control => address_control_tb,
             mem_sel => mem_sel_tb,
+				wren_b => wren_b_tb,
             program_memory => program_memory_tb,
             data_memory => data_memory_tb
         );
@@ -62,25 +65,30 @@ begin
         data_in_control_tb <= '0';
         mem_sel_tb <= '0';
         address_control_tb <= "00";
-        wait for 20 ns;
 
         -- Retrieve instructions from program memory
         pc_tb <= "0000000000000000";
         wait for 20 ns;
 
         pc_tb <= "0000000000000001";
-        wait for 40 ns;
+        wait for 20 ns;
+		  
+		  pc_tb <= "0000000000000010";
+		  wait for 20 ns;
 
         -- Store data in data memory
         mem_sel_tb <= '1';
+		  wren_b_tb <= '1';
         data_in_control_tb <= '1';
         address_control_tb <= "01";
         rx_tb <= "0000111100001111";
         wait for 20 ns;
-
-        -- Retrieve data from data memory
+			
+		  wren_b_tb <= '0';
+		  
+        ---- Retrieve data from data memory
         data_in_control_tb <= '0';
-        wait for 20 ns;
+        --wait for 20 ns;
 
         -- Finish simulation
         wait;

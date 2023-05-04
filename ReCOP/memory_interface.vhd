@@ -13,6 +13,7 @@ entity memory_interface is
 		data_in_control : in std_logic := 'X';
 		address_control : in std_logic_vector (1 downto 0);
 		mem_sel : in std_logic := 'X';
+		wren_b : in std_logic := '0';
 		
 		program_memory : out std_logic_vector(15 downto 0);
 		data_memory : out std_logic_vector(15 downto 0)
@@ -29,8 +30,8 @@ architecture behaviour of memory_interface is
 	
 	component memory_block
 		port (
-			address_a		: in std_logic_vector (11 DOWNTO 0);
-			address_b		: in std_logic_vector (11 DOWNTO 0);
+			address_a		: in std_logic_vector (11 DOWNTO 0) := (others => '0');
+			address_b		: in std_logic_vector (11 DOWNTO 0) := (others => '0');
 			clock		: in std_logic  := '1';
 			data_a		: in std_logic_vector (15 DOWNTO 0) := (others => 'X');
 			data_b		: in std_logic_vector (15 DOWNTO 0);
@@ -43,44 +44,19 @@ architecture behaviour of memory_interface is
 	
 begin
 
-	data_selection : process (clock, data_in_control, ir_hold, rx)
-	begin
-		if rising_edge(clock) then
-			case data_in_control is
-				when '0' => data_b <= ir_hold;
-				when '1' => data_b <= rx;
-				when others => data_b <= (others => 'X');
-			end case;
-		end if;
-	end process;
+	data_b <= ir_hold when (data_in_control = '0') else
+				 rx;
 	
-	address_selection : process (clock, address_control, pc, rx, rz, ir_hold)
-	begin
-		if rising_edge(clock) then
-			case address_control is
-				when "00" => temp_address <= pc;
-				when "01" => temp_address <= rx;
-				when "10" => temp_address <= rz;
-				when "11" => temp_address <= ir_hold;
-				when others => temp_address <= (others => 'X');
-			end case;
-		end if;
-	end process;
-	
-	address_update : process (clock, mem_sel, temp_address)
-	begin
-		if rising_edge(clock) then
-			if mem_sel = '0' then
-				address_a_temp <= temp_address(11 downto 0);
-			elsif mem_sel = '1' then
-				address_b_temp <= temp_address(11 downto 0);
-			end if;
-		end if;
-	end process;
+	temp_address <= pc when (address_control = "00") else
+						 rx when (address_control = "01") else
+						 rz when (address_control = "10") else
+						 ir_hold when (address_control = "11");
+						 
+	address_a_temp <= temp_address(11 downto 0) when (mem_sel = '0') else address_a_temp;
+	address_b_temp <= temp_address(11 downto 0) when (mem_sel = '1') else address_b_temp; 
 	
 	address_a <= address_a_temp;
-	address_b <= address_b_temp;
-	
+	addresS_b <= address_b_temp;
 	
 	memory_test : memory_block
 		port map (
@@ -90,8 +66,9 @@ begin
 			data_a => open,
 			data_b => data_b,
 			wren_a => open,
-			wren_b => open,
+			wren_b => wren_b,
 			q_a => program_memory,
 			q_b => data_memory
 		);
+		
 end architecture behaviour;
