@@ -12,6 +12,7 @@ architecture behavior of PC_TB is
 		clk         : in std_logic;
 		reset       : in std_logic;
 		enable      : in std_logic;
+		pc_control_sig		: in std_logic;
 		m_out       : in std_logic_vector(15 downto 0);
 		rx          : in std_logic_vector(15 downto 0);
 		ir_hold     : in std_logic_vector(15 downto 0);
@@ -24,6 +25,7 @@ architecture behavior of PC_TB is
 	signal clk        : std_logic := '0';
 	signal reset      : std_logic := '0';
 	signal enable     : std_logic := '0';
+	signal pc_control_sig	: std_logic := '0';
 	signal m_out      : std_logic_vector(15 downto 0) := (others => '0');
 	signal rx         : std_logic_vector(15 downto 0) := (others => '0');
 	signal ir_hold    : std_logic_vector(15 downto 0) := (others => '0');
@@ -47,7 +49,8 @@ begin
 		rx          => rx,
 		ir_hold     => ir_hold,
 		mux_select  => mux_select,
-		pc_hold     => pc_hold
+		pc_hold     => pc_hold,
+		pc_control_sig => pc_control_sig
 	);
 
 	-- Clock process definitions
@@ -65,6 +68,7 @@ begin
 	stim_proc : process
 	begin
 		-- Reset PC
+		pc_control_sig <= '1';
 		reset <= '1';
 		enable <= '0';
 		mux_select <= "00";
@@ -94,11 +98,11 @@ begin
 		assert pc_hold = "0000000000000010" report "Test with ir_hold input failed" severity error;
 		wait for 20 ns;
 
-		-- Test with adder_in
+		-- Test with adder_in input
 		adder_in <= "0000000000000011";
 		mux_select <= "11";
 		wait for 20 ns;
-		assert pc_hold = "0000000000000011" report "Test with adder_in input failed" severity error;
+		assert pc_hold = "0000000000000011" report "Test with ir_hold input failed" severity error;
 		wait for 20 ns;
 	
 	end process;
