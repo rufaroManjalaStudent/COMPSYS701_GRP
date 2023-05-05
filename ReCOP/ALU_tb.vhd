@@ -78,5 +78,4 @@ architecture sim of ALU_tb is
                 ALU_addm    => t_ALU_addm
             );
 
-
 end architecture;
