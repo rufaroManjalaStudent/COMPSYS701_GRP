@@ -1,0 +1,554 @@
+m255
+K4
+z2
+!s11e vcom 2020.2 2020.04, Apr 19 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/Users/epik990/Documents/v2/sims
+T_opt
+!s110 1683270244
+VM?_1kPTPjOnLeEaXd5ODS2
+04 3 8 work top bdf_type 1
+=20-e454e87a7b0a-6454aa64-e0-4868
+o-quiet -auto_acc_if_foreign -work work +acc
+tCvgOpt 0
+n@_opt
+OE;O;2020.2;71
+Ealu
+Z0 w1683263018
+Z1 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+Z2 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
+Z3 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
+Z4 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z5 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 236
+Z6 dC:/Users/epik990/Documents/v2/sims2
+Z7 8C:/Users/epik990/Documents/v2/ReCOP/ALU.vhd
+Z8 FC:/Users/epik990/Documents/v2/ReCOP/ALU.vhd
+l0
+L8 1
+Vffc7^EWCQTQ`2degn3J`i2
+!s100 ABU]ka:ii`>RnjXJ>Goni2
+Z9 OE;C;2020.2;71
+32
+Z10 !s110 1683270220
+!i10b 1
+Z11 !s108 1683270220.000000
+Z12 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/Users/epik990/Documents/v2/ReCOP/ALU.vhd|
+Z13 !s107 C:/Users/epik990/Documents/v2/ReCOP/ALU.vhd|
+!i113 0
+Z14 o-work work -2002 -explicit
+Z15 tExplicit 1 CvgOpt 0
+Abehaviour
+R1
+R2
+R3
+R4
+R5
+DEx4 work 3 alu 0 22 ffc7^EWCQTQ`2degn3J`i2
+!i122 236
+l41
+L35 32
+VOMV<B7iFQ6L?hAo57=0]K0
+!s100 PF<2Mnj:F^;8eNKYEFY9O1
+R9
+32
+R10
+!i10b 1
+R11
+R12
+R13
+!i113 0
+R14
+R15
+Econtrolunit
+Z16 w1683270215
+R1
+R2
+R4
+R5
+!i122 237
+R6
+Z17 8C:/Users/epik990/Documents/v2/ReCOP/ControlUnit.vhd
+Z18 FC:/Users/epik990/Documents/v2/ReCOP/ControlUnit.vhd
+l0
+L6 1
+V[@6AN_]_Ol985W8lj7GKz0
+!s100 YGGe0Jd5Eab`8OH[YU?J72
+R9
+32
+R10
+!i10b 1
+R11
+Z19 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/Users/epik990/Documents/v2/ReCOP/ControlUnit.vhd|
+Z20 !s107 C:/Users/epik990/Documents/v2/ReCOP/ControlUnit.vhd|
+!i113 0
+R14
+R15
+Abehaviour
+R1
+R2
+R4
+R5
+DEx4 work 11 controlunit 0 22 [@6AN_]_Ol985W8lj7GKz0
+!i122 237
+l43
+L36 94
+V_0jYO?lA5Scgb]?:VUOmZ0
+!s100 Hm3kHJfGW6VLUYlBCK6AB1
+R9
+32
+R10
+!i10b 1
+R11
+R19
+R20
+!i113 0
+R14
+R15
+Edatapath
+Z21 w1683251240
+R1
+R2
+R4
+R5
+!i122 238
+R6
+Z22 8C:/Users/epik990/Documents/v2/ReCOP/Datapath.vhd
+Z23 FC:/Users/epik990/Documents/v2/ReCOP/Datapath.vhd
+l0
+L7 1
+VO57<cN:EZco9ICcFYZLiT1
+!s100 A0z;mK5QnSmiM]S0N_gl<2
+R9
+32
+R10
+!i10b 1
+R11
+Z24 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/Users/epik990/Documents/v2/ReCOP/Datapath.vhd|
+Z25 !s107 C:/Users/epik990/Documents/v2/ReCOP/Datapath.vhd|
+!i113 0
+R14
+R15
+Astructure
+R1
+R2
+R4
+R5
+DEx4 work 8 datapath 0 22 O57<cN:EZco9ICcFYZLiT1
+!i122 238
+l94
+L26 111
+VZL6a_;o]4A8e^3ff<bkEG2
+!s100 Q^]@9:@<6R5<e1KSGog`A0
+R9
+32
+R10
+!i10b 1
+R11
+R24
+R25
+!i113 0
+R14
+R15
+Eir
+Z26 w1683269556
+R3
+R4
+R5
+!i122 239
+R6
+Z27 8C:/Users/epik990/Documents/v2/ReCOP/IR.vhd
+Z28 FC:/Users/epik990/Documents/v2/ReCOP/IR.vhd
+l0
+L6 1
+VgMlKc5TDNDXOh?9>NceL<3
+!s100 ;NKU5odzc804g6b?e0:dN0
+R9
+32
+Z29 !s110 1683270221
+!i10b 1
+Z30 !s108 1683270221.000000
+Z31 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/Users/epik990/Documents/v2/ReCOP/IR.vhd|
+Z32 !s107 C:/Users/epik990/Documents/v2/ReCOP/IR.vhd|
+!i113 0
+R14
+R15
+Abehaviour
+R3
+R4
+R5
+DEx4 work 2 ir 0 22 gMlKc5TDNDXOh?9>NceL<3
+!i122 239
+l24
+L22 25
+V?C3X]P2J5<k>JO?QIQX:[2
+!s100 EN@<<cCSl^8@_c;JC1N^_1
+R9
+32
+R29
+!i10b 1
+R30
+R31
+R32
+!i113 0
+R14
+R15
+Emax
+Z33 w1683260326
+R3
+R4
+R5
+!i122 240
+R6
+Z34 8C:/Users/epik990/Documents/v2/ReCOP/MAX.vhd
+Z35 FC:/Users/epik990/Documents/v2/ReCOP/MAX.vhd
+l0
+L5 1
+VTkDNCSjz7@MZ]?HV=TnVC2
+!s100 hK0QnGPDKlFz;dOe:iK;z1
+R9
+32
+R29
+!i10b 1
+R30
+Z36 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/Users/epik990/Documents/v2/ReCOP/MAX.vhd|
+Z37 !s107 C:/Users/epik990/Documents/v2/ReCOP/MAX.vhd|
+!i113 0
+R14
+R15
+Abehaviour
+R3
+R4
+R5
+DEx4 work 3 max 0 22 TkDNCSjz7@MZ]?HV=TnVC2
+!i122 240
+l15
+L14 5
+V=JIG63ZcEj>gC;c[j?G8C0
+!s100 AjU;[`aKU?>fzUdkNo<Ye3
+R9
+32
+R29
+!i10b 1
+R30
+R36
+R37
+!i113 0
+R14
+R15
+Ememory_block
+Z38 w1683266927
+Z39 DPx9 altera_mf 20 altera_mf_components 0 22 4FYQB7gB5E`AB1l^eLSkC2
+R4
+R5
+!i122 246
+R6
+Z40 8C:/Users/epik990/Documents/v2/ReCOP/memory_block/memory_block.vhd
+Z41 FC:/Users/epik990/Documents/v2/ReCOP/memory_block/memory_block.vhd
+l0
+L42 1
+VA]U=<eXB:J`@cQnTUN6^82
+!s100 D0OlgM_:EeNUPBRk0jfET3
+R9
+32
+R29
+!i10b 1
+R30
+Z42 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/Users/epik990/Documents/v2/ReCOP/memory_block/memory_block.vhd|
+Z43 !s107 C:/Users/epik990/Documents/v2/ReCOP/memory_block/memory_block.vhd|
+!i113 0
+R14
+R15
+Asyn
+R39
+R4
+R5
+DEx4 work 12 memory_block 0 22 A]U=<eXB:J`@cQnTUN6^82
+!i122 246
+l63
+L58 54
+VdQ@1XT02g;?GcOIUfViH93
+!s100 G:lWR?l6fZN1Ke:LXW`7H0
+R9
+32
+R29
+!i10b 1
+R30
+R42
+R43
+!i113 0
+R14
+R15
+Ememory_interface
+Z44 w1683191990
+R1
+R2
+R4
+R5
+!i122 241
+R6
+Z45 8C:/Users/epik990/Documents/v2/ReCOP/memory_interface.vhd
+Z46 FC:/Users/epik990/Documents/v2/ReCOP/memory_interface.vhd
+l0
+L5 1
+VM:bfJM[@AH=Af93SN=OF92
+!s100 TSRZSezkz6dB=V>7I;1hR0
+R9
+32
+R29
+!i10b 1
+R30
+Z47 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/Users/epik990/Documents/v2/ReCOP/memory_interface.vhd|
+Z48 !s107 C:/Users/epik990/Documents/v2/ReCOP/memory_interface.vhd|
+!i113 0
+R14
+R15
+Abehaviour
+R1
+R2
+R4
+R5
+DEx4 work 16 memory_interface 0 22 M:bfJM[@AH=Af93SN=OF92
+!i122 241
+l45
+L23 52
+VTabM>VCB2L:nMOT;<Gn?D3
+!s100 6XKhEdk0gSA1<jn]VPWlm2
+R9
+32
+R29
+!i10b 1
+R30
+R47
+R48
+!i113 0
+R14
+R15
+Epc
+Z49 w1683269814
+R1
+R2
+R3
+R4
+R5
+!i122 242
+R6
+Z50 8C:/Users/epik990/Documents/v2/ReCOP/PC.vhd
+Z51 FC:/Users/epik990/Documents/v2/ReCOP/PC.vhd
+l0
+L7 1
+VVYog3Tl:idkCC;SU7>oXZ3
+!s100 5^ZN_;:jS0?`oZ=N]^Rka3
+R9
+32
+R29
+!i10b 1
+R30
+Z52 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/Users/epik990/Documents/v2/ReCOP/PC.vhd|
+Z53 !s107 C:/Users/epik990/Documents/v2/ReCOP/PC.vhd|
+!i113 0
+R14
+R15
+Abehaviour
+R1
+R2
+R3
+R4
+R5
+DEx4 work 2 pc 0 22 VYog3Tl:idkCC;SU7>oXZ3
+!i122 242
+l33
+L30 27
+Vz7M03S@i[L88DN6LnMAbX3
+!s100 3DD[W]=fNmA[dliSeh^DR3
+R9
+32
+R29
+!i10b 1
+R30
+R52
+R53
+!i113 0
+R14
+R15
+Eregfile
+Z54 w1683264870
+R1
+R2
+R3
+R4
+R5
+!i122 243
+R6
+Z55 8C:/Users/epik990/Documents/v2/ReCOP/RegFile.vhd
+Z56 FC:/Users/epik990/Documents/v2/ReCOP/RegFile.vhd
+l0
+L6 1
+V]nGzFB:eQaMeg]mS=h6>P0
+!s100 U^Z^daR>zK3LaHP3Tb`LH2
+R9
+32
+R29
+!i10b 1
+R30
+Z57 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/Users/epik990/Documents/v2/ReCOP/RegFile.vhd|
+Z58 !s107 C:/Users/epik990/Documents/v2/ReCOP/RegFile.vhd|
+!i113 0
+R14
+R15
+Abehaviour
+R1
+R2
+R3
+R4
+R5
+DEx4 work 7 regfile 0 22 ]nGzFB:eQaMeg]mS=h6>P0
+!i122 243
+l44
+L34 37
+VLk@9fP[Ebk=BiakAMBofJ0
+!s100 ?bAX]eHOQgNbK^0JjhZGY0
+R9
+32
+R29
+!i10b 1
+R30
+R57
+R58
+!i113 0
+R14
+R15
+Esys_clock
+Z59 w1683253197
+R3
+R4
+R5
+!i122 247
+R6
+Z60 8C:/Users/epik990/Documents/v2/ReCOP/clock/sys_clock/synthesis/sys_clock.vhd
+Z61 FC:/Users/epik990/Documents/v2/ReCOP/clock/sys_clock/synthesis/sys_clock.vhd
+l0
+L9 1
+V2R43R8E@PFEKIe9QinWM[1
+!s100 @hkhZcWe9>D]I_Xc9kIAQ1
+R9
+32
+R29
+!i10b 1
+R30
+Z62 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/Users/epik990/Documents/v2/ReCOP/clock/sys_clock/synthesis/sys_clock.vhd|
+Z63 !s107 C:/Users/epik990/Documents/v2/ReCOP/clock/sys_clock/synthesis/sys_clock.vhd|
+!i113 0
+R14
+R15
+Artl
+R3
+R4
+R5
+DEx4 work 9 sys_clock 0 22 2R43R8E@PFEKIe9QinWM[1
+!i122 247
+l26
+L15 23
+Vln=77HnKYAEf_LfSBI58^0
+!s100 J0M=Off:RQZZej69gaA]32
+R9
+32
+R29
+!i10b 1
+R30
+R62
+R63
+!i113 0
+R14
+R15
+Etop
+Z64 w1683269337
+R4
+R5
+!i122 244
+R6
+Z65 8C:/Users/epik990/Documents/v2/ReCOP/top.vhd
+Z66 FC:/Users/epik990/Documents/v2/ReCOP/top.vhd
+l0
+L24 1
+VFmm4NS>>JNgN_1FT6E6hi3
+!s100 ;6jzbzEfWLJKWALnUSm6l3
+R9
+32
+R29
+!i10b 1
+R30
+Z67 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/Users/epik990/Documents/v2/ReCOP/top.vhd|
+Z68 !s107 C:/Users/epik990/Documents/v2/ReCOP/top.vhd|
+!i113 0
+R14
+R15
+Abdf_type
+R4
+R5
+DEx4 work 3 top 0 22 Fmm4NS>>JNgN_1FT6E6hi3
+!i122 244
+l190
+L27 293
+V0Q^mAzGFPgST=WbXgfT<c0
+!s100 NcRh2_z=kaYI_nMbUezP23
+R9
+32
+R29
+!i10b 1
+R30
+R67
+R68
+!i113 0
+R14
+R15
+Ezregister
+Z69 w1683258533
+R1
+R2
+R4
+R5
+!i122 245
+R6
+Z70 8C:/Users/epik990/Documents/v2/ReCOP/zRegister.vhd
+Z71 FC:/Users/epik990/Documents/v2/ReCOP/zRegister.vhd
+l0
+L5 1
+VL;bo6o]WWf^?7S<bGO`zF1
+!s100 Sj^[>joG?jPWZcYaG62W?1
+R9
+32
+R29
+!i10b 1
+R30
+Z72 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/Users/epik990/Documents/v2/ReCOP/zRegister.vhd|
+Z73 !s107 C:/Users/epik990/Documents/v2/ReCOP/zRegister.vhd|
+!i113 0
+R14
+R15
+Abehaviour
+R1
+R2
+R4
+R5
+DEx4 work 9 zregister 0 22 L;bo6o]WWf^?7S<bGO`zF1
+!i122 245
+l15
+L13 11
+V]n6>ONQD`:ImmY8oIONN22
+!s100 zFhO@>SQD]3e4WY>n[4jj1
+R9
+32
+R29
+!i10b 1
+R30
+R72
+R73
+!i113 0
+R14
+R15

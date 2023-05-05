@@ -1,0 +1,16 @@
+
+State Machine - |top|ControlUnit:b2v_inst|state
+Name state.R_HOLD state.R state.T2 state.T1 state.T0 
+state.T0 0 0 0 0 0 
+state.T1 0 0 0 1 1 
+state.T2 0 0 1 0 1 
+state.R 0 1 0 0 1 
+state.R_HOLD 1 0 0 0 1 
+
+State Machine - |top|ControlUnit:b2v_inst|next_state
+Name next_state.R_HOLD next_state.R next_state.T2 next_state.T1 next_state.T0 
+next_state.T0 0 0 0 0 0 
+next_state.T1 0 0 0 1 1 
+next_state.T2 0 0 1 0 1 
+next_state.R 0 1 0 0 1 
+next_state.R_HOLD 1 0 0 0 1 

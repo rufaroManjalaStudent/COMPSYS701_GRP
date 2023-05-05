@@ -1,0 +1,118 @@
+C:/Users/epik990/Documents/v2/ReCOP/ControlUnit.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/epik990/Documents/v2/ReCOP/ControlUnit.vhd
+Model Technology ModelSim SE vcom 2020.2 Compiler 2020.04 Apr 19 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity ControlUnit
+-- Compiling architecture behaviour of ControlUnit
+
+} {} {}} C:/Users/epik990/Documents/v2/ReCOP/ALU.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/epik990/Documents/v2/ReCOP/ALU.vhd
+Model Technology ModelSim SE vcom 2020.2 Compiler 2020.04 Apr 19 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity ALU
+-- Compiling architecture behaviour of ALU
+
+} {} {}} C:/Users/epik990/Documents/v2/ReCOP/RegFile.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/epik990/Documents/v2/ReCOP/RegFile.vhd
+Model Technology ModelSim SE vcom 2020.2 Compiler 2020.04 Apr 19 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity regfile
+-- Compiling architecture behaviour of regfile
+
+} {} {}} C:/Users/epik990/Documents/v2/ReCOP/zRegister.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/epik990/Documents/v2/ReCOP/zRegister.vhd
+Model Technology ModelSim SE vcom 2020.2 Compiler 2020.04 Apr 19 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity zRegister
+-- Compiling architecture behaviour of zRegister
+
+} {} {}} C:/Users/epik990/Documents/v2/ReCOP/memory_interface.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/epik990/Documents/v2/ReCOP/memory_interface.vhd
+Model Technology ModelSim SE vcom 2020.2 Compiler 2020.04 Apr 19 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity memory_interface
+-- Compiling architecture behaviour of memory_interface
+
+} {} {}} C:/Users/epik990/Documents/v2/ReCOP/PC.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/epik990/Documents/v2/ReCOP/PC.vhd
+Model Technology ModelSim SE vcom 2020.2 Compiler 2020.04 Apr 19 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity PC
+-- Compiling architecture behaviour of PC
+
+} {} {}} C:/Users/epik990/Documents/v2/ReCOP/IR.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/epik990/Documents/v2/ReCOP/IR.vhd
+Model Technology ModelSim SE vcom 2020.2 Compiler 2020.04 Apr 19 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity IR
+-- Compiling architecture behaviour of IR
+
+} {} {}} C:/Users/epik990/Documents/v2/ReCOP/top.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/epik990/Documents/v2/ReCOP/top.vhd
+Model Technology ModelSim SE vcom 2020.2 Compiler 2020.04 Apr 19 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity top
+-- Compiling architecture bdf_type of top
+
+} {} {}} C:/Users/epik990/Documents/v2/ReCOP/memory_block/memory_block.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/epik990/Documents/v2/ReCOP/memory_block/memory_block.vhd
+Model Technology ModelSim SE vcom 2020.2 Compiler 2020.04 Apr 19 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package altera_mf_components
+-- Compiling entity memory_block
+-- Compiling architecture SYN of memory_block
+
+} {} {}} C:/Users/epik990/Documents/v2/ReCOP/MAX.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/epik990/Documents/v2/ReCOP/MAX.vhd
+Model Technology ModelSim SE vcom 2020.2 Compiler 2020.04 Apr 19 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity Max
+-- Compiling architecture behaviour of Max
+
+} {} {}} C:/Users/epik990/Documents/v2/ReCOP/Datapath.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/epik990/Documents/v2/ReCOP/Datapath.vhd
+Model Technology ModelSim SE vcom 2020.2 Compiler 2020.04 Apr 19 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity DataPath
+-- Compiling architecture structure of DataPath
+
+} {} {}} C:/Users/epik990/Documents/v2/ReCOP/clock/sys_clock/synthesis/sys_clock.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/epik990/Documents/v2/ReCOP/clock/sys_clock/synthesis/sys_clock.vhd
+Model Technology ModelSim SE vcom 2020.2 Compiler 2020.04 Apr 19 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity sys_clock
+-- Compiling architecture rtl of sys_clock
+
+} {} {}}

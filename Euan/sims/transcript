@@ -1,0 +1,29 @@
+# 0 compiles, 5 failed with no errors.
+# Compile of ControlUnit.vhd was successful.
+# Compile of Datapath.vhd failed with 2 errors.
+# Compile of IR.vhd was successful.
+# Compile of memory_interface.vhd was successful.
+# Compile of PC.vhd was successful.
+# Compile of ReCOP.vhd was successful.
+# 6 compiles, 1 failed with 2 errors.
+# Compile of ControlUnit.vhd was successful.
+# Compile of Datapath.vhd failed with 2 errors.
+# Compile of IR.vhd was successful.
+# Compile of memory_interface.vhd was successful.
+# Compile of PC.vhd was successful.
+# Compile of ReCOP.vhd was successful.
+# 6 compiles, 1 failed with 2 errors.
+# Compile of ControlUnit.vhd was successful.
+# Compile of Datapath.vhd failed with 1 errors.
+# Compile of IR.vhd was successful.
+# Compile of memory_interface.vhd was successful.
+# Compile of PC.vhd was successful.
+# Compile of ReCOP.vhd was successful.
+# 6 compiles, 1 failed with 1 error.
+# Compile of ControlUnit.vhd was successful.
+# Compile of Datapath.vhd was successful.
+# Compile of IR.vhd was successful.
+# Compile of memory_interface.vhd was successful.
+# Compile of PC.vhd was successful.
+# Compile of ReCOP.vhd was successful.
+# 6 compiles, 0 failed with no errors.

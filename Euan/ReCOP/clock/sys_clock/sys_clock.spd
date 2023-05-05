@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simPackage>
+ <file
+   path="simulation/submodules/altera_avalon_clock_source.vhd"
+   type="VHDL"
+   library="clock_source_0" />
+ <file path="simulation/sys_clock.vhd" type="VHDL" />
+ <topLevel name="sys_clock" />
+ <deviceFamily name="cyclonev" />
+</simPackage>

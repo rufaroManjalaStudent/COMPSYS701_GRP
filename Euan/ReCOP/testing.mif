@@ -1,0 +1,13 @@
+DEPTH = 32;               -- The size of memory in words
+WIDTH = 16;               -- The width of memory in bits
+ADDRESS_RADIX = DEC;      -- The radix for address values
+DATA_RADIX = HEX;         -- The radix for data values
+
+CONTENT
+BEGIN
+0 : 1234;                 -- word 0
+1 : 5678;                 -- word 1
+2 : 9ABC;                 -- word 2
+3 : DEFA;                 -- word 3
+[4..31] : 0000;           -- words 4 to 31 (fill with zeros)
+END;

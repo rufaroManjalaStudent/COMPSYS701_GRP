@@ -1,0 +1,18 @@
+# system info sys_clock on 2023.05.05.14:19:56
+system_info:
+name,value
+DEVICE,5CSEMA5F31C6
+DEVICE_FAMILY,Cyclone V
+GENERATION_ID,1683253196
+#
+#
+# Files generated for sys_clock on 2023.05.05.14:19:56
+files:
+filepath,kind,attributes,module,is_top
+simulation/sys_clock.vhd,VHDL,,sys_clock,true
+simulation/submodules/altera_avalon_clock_source.vhd,VHDL,,altera_avalon_clock_source,false
+#
+# Map from instance-path to kind of module
+instances:
+instancePath,module
+sys_clock.clock_source_0,altera_avalon_clock_source

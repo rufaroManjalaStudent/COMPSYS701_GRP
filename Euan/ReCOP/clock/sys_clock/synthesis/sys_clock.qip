@@ -1,0 +1,38 @@
+set_global_assignment -entity "sys_clock" -library "sys_clock" -name IP_TOOL_NAME "Qsys"
+set_global_assignment -entity "sys_clock" -library "sys_clock" -name IP_TOOL_VERSION "18.1"
+set_global_assignment -entity "sys_clock" -library "sys_clock" -name IP_TOOL_ENV "Qsys"
+set_global_assignment -library "sys_clock" -name SOPCINFO_FILE [file join $::quartus(qip_path) "../../sys_clock.sopcinfo"]
+set_global_assignment -entity "sys_clock" -library "sys_clock" -name SLD_INFO "QSYS_NAME sys_clock HAS_SOPCINFO 1 GENERATION_ID 1683253197"
+set_global_assignment -library "sys_clock" -name MISC_FILE [file join $::quartus(qip_path) "../sys_clock.cmp"]
+set_global_assignment -library "sys_clock" -name SLD_FILE [file join $::quartus(qip_path) "sys_clock.debuginfo"]
+set_global_assignment -entity "sys_clock" -library "sys_clock" -name IP_TARGETED_DEVICE_FAMILY "Cyclone V"
+set_global_assignment -entity "sys_clock" -library "sys_clock" -name IP_GENERATED_DEVICE_FAMILY "{Cyclone V}"
+set_global_assignment -entity "sys_clock" -library "sys_clock" -name IP_QSYS_MODE "STANDALONE"
+set_global_assignment -name SYNTHESIS_ONLY_QIP ON
+set_global_assignment -library "sys_clock" -name MISC_FILE [file join $::quartus(qip_path) "../../sys_clock.qsys"]
+set_global_assignment -entity "sys_clock" -library "sys_clock" -name IP_COMPONENT_NAME "c3lzX2Nsb2Nr"
+set_global_assignment -entity "sys_clock" -library "sys_clock" -name IP_COMPONENT_DISPLAY_NAME "c3lzX2Nsb2Nr"
+set_global_assignment -entity "sys_clock" -library "sys_clock" -name IP_COMPONENT_REPORT_HIERARCHY "On"
+set_global_assignment -entity "sys_clock" -library "sys_clock" -name IP_COMPONENT_INTERNAL "Off"
+set_global_assignment -entity "sys_clock" -library "sys_clock" -name IP_COMPONENT_VERSION "MS4w"
+set_global_assignment -entity "sys_clock" -library "sys_clock" -name IP_COMPONENT_PARAMETER "QVVUT19HRU5FUkFUSU9OX0lE::MTY4MzI1MzE5Nw==::QXV0byBHRU5FUkFUSU9OX0lE"
+set_global_assignment -entity "sys_clock" -library "sys_clock" -name IP_COMPONENT_PARAMETER "QVVUT19ERVZJQ0VfRkFNSUxZ::Q3ljbG9uZSBW::QXV0byBERVZJQ0VfRkFNSUxZ"
+set_global_assignment -entity "sys_clock" -library "sys_clock" -name IP_COMPONENT_PARAMETER "QVVUT19ERVZJQ0U=::NUNTRU1BNUYzMUM2::QXV0byBERVZJQ0U="
+set_global_assignment -entity "sys_clock" -library "sys_clock" -name IP_COMPONENT_PARAMETER "QVVUT19ERVZJQ0VfU1BFRURHUkFERQ==::Ng==::QXV0byBERVZJQ0VfU1BFRURHUkFERQ=="
+set_global_assignment -entity "altera_avalon_clock_source" -library "sys_clock" -name IP_COMPONENT_NAME "YWx0ZXJhX2F2YWxvbl9jbG9ja19zb3VyY2U="
+set_global_assignment -entity "altera_avalon_clock_source" -library "sys_clock" -name IP_COMPONENT_DISPLAY_NAME "Q2xvY2sgU291cmNlIEJGTSBJbnRlbCBGUEdBIElQ"
+set_global_assignment -entity "altera_avalon_clock_source" -library "sys_clock" -name IP_COMPONENT_REPORT_HIERARCHY "Off"
+set_global_assignment -entity "altera_avalon_clock_source" -library "sys_clock" -name IP_COMPONENT_INTERNAL "Off"
+set_global_assignment -entity "altera_avalon_clock_source" -library "sys_clock" -name IP_COMPONENT_AUTHOR "QWx0ZXJhIENvcnBvcmF0aW9u"
+set_global_assignment -entity "altera_avalon_clock_source" -library "sys_clock" -name IP_COMPONENT_VERSION "MTguMQ=="
+set_global_assignment -entity "altera_avalon_clock_source" -library "sys_clock" -name IP_COMPONENT_DESCRIPTION "QWx0ZXJhIENsb2NrIFNvdXJjZSBCRk0="
+set_global_assignment -entity "altera_avalon_clock_source" -library "sys_clock" -name IP_COMPONENT_PARAMETER "Q0xPQ0tfUkFURQ==::NTA=::Q2xvY2sgcmF0ZQ=="
+set_global_assignment -entity "altera_avalon_clock_source" -library "sys_clock" -name IP_COMPONENT_PARAMETER "Q0xPQ0tfVU5JVA==::MTAwMDAwMA==::Q2xvY2sgcmF0ZSB1bml0"
+
+set_global_assignment -library "sys_clock" -name VHDL_FILE [file join $::quartus(qip_path) "sys_clock.vhd"]
+set_global_assignment -library "sys_clock" -name SYSTEMVERILOG_FILE [file join $::quartus(qip_path) "submodules/verbosity_pkg.sv"]
+set_global_assignment -library "sys_clock" -name SYSTEMVERILOG_FILE [file join $::quartus(qip_path) "submodules/altera_avalon_clock_source.sv"]
+
+set_global_assignment -entity "altera_avalon_clock_source" -library "sys_clock" -name IP_TOOL_NAME "altera_avalon_clock_source"
+set_global_assignment -entity "altera_avalon_clock_source" -library "sys_clock" -name IP_TOOL_VERSION "18.1"
+set_global_assignment -entity "altera_avalon_clock_source" -library "sys_clock" -name IP_TOOL_ENV "Qsys"
