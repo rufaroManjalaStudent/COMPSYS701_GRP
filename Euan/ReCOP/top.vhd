@@ -26,9 +26,12 @@ END top;
 
 ARCHITECTURE bdf_type OF top IS 
 
+signal enable : std_logic := '0';
+
 COMPONENT controlunit
 	PORT(clk : IN STD_LOGIC;
 		 reset : IN STD_LOGIC;
+		 enable_pd : in std_logic;
 		 zOut : IN STD_LOGIC;
 		 IR_AM : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
 		 IR_OpCode : IN STD_LOGIC_VECTOR(5 DOWNTO 0);
@@ -41,6 +44,7 @@ COMPONENT controlunit
 		 selz_control : OUT STD_LOGIC;
 		 selx_control : OUT STD_LOGIC;
 		 CarryIn : OUT STD_LOGIC;
+		 write_en : out std_logic;
 		 address_control : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
 		 ALU_Opcode : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
 		 cu_selx : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
@@ -96,7 +100,8 @@ GENERIC (width : INTEGER
 		 z_control : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
 		 flmr : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
 		 rx_out : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
-		 rz : OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
+		 rz : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
+		 write_en : in std_logic
 	);
 END COMPONENT;
 
@@ -185,6 +190,7 @@ SIGNAL	SYNTHESIZED_WIRE_39 :  STD_LOGIC_VECTOR(1 DOWNTO 0);
 SIGNAL	SYNTHESIZED_WIRE_43 :  STD_LOGIC;
 signal ld_ir2 : std_logic;
 signal reset : STD_LOGIC := '0';
+signal write_enabled : std_logic;
 
 
 BEGIN 
@@ -198,15 +204,15 @@ end process clk_gen;
 
 reset_proc : process
 begin
-	reset <= '1';
-	wait for 20 ns;
-	reset <= '0';
+	wait for 40 ns;
+	enable <= '1';
 	wait;
 end process reset_proc;
 
 b2v_inst : controlunit
 PORT MAP(clk => SYNTHESIZED_WIRE_46,
 		reset => reset,
+		enable_pd => enable,
 		 zOut => SYNTHESIZED_WIRE_1,
 		 IR_AM => SYNTHESIZED_WIRE_47,
 		 IR_OpCode => SYNTHESIZED_WIRE_3,
@@ -219,6 +225,7 @@ PORT MAP(clk => SYNTHESIZED_WIRE_46,
 		 selz_control => SYNTHESIZED_WIRE_14,
 		 selx_control => SYNTHESIZED_WIRE_15,
 		 CarryIn => SYNTHESIZED_WIRE_35,
+		 write_en => write_enabled,
 		 address_control => SYNTHESIZED_WIRE_30,
 		 ALU_Opcode => SYNTHESIZED_WIRE_39,
 		 cu_selx => SYNTHESIZED_WIRE_17,
@@ -269,7 +276,8 @@ PORT MAP(clk => SYNTHESIZED_WIRE_46,
 		 z_control => SYNTHESIZED_WIRE_25,
 		 flmr => SYNTHESIZED_WIRE_37,
 		 rx_out => SYNTHESIZED_WIRE_50,
-		 rz => SYNTHESIZED_WIRE_51);
+		 rz => SYNTHESIZED_WIRE_51,
+		 write_en => write_enabled);
 
 
 b2v_inst5 : memory_interface
