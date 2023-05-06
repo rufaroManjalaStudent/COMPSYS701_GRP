@@ -5,36 +5,40 @@ use ieee.std_logic_unsigned.all;
 
 entity ControlUnit is
     port (
-        clk : in std_logic;
-        reset : in std_logic;
+        clk         : in std_logic;
+        reset       : in std_logic;
+
+        --debugging signals
+        start       :in std_logic; --for debugging
+        clr_start   :out std_logic;
         
-        pc_control_sig : out std_logic;
-        pc_mux_select : out std_logic_vector(1 downto 0);
-		  data_in_control : out std_logic;
-		  address_control : out std_logic_vector(1 downto 0);
-		  mem_sel : out std_logic;
-		  wren_b : out std_logic;
-        ld_ir1 : out std_logic;
-		  ld_ir2 : out std_logic;
+        pc_control_sig      : out std_logic;
+        pc_mux_select       : out std_logic_vector(1 downto 0);
+		  data_in_control   : out std_logic;
+		  address_control   : out std_logic_vector(1 downto 0);
+		  mem_sel           : out std_logic;
+		  wren_b            : out std_logic;
+        ld_ir1              : out std_logic;
+		  ld_ir2            : out std_logic;
 		  
 		  
-		  cu_selx : out std_logic_vector(3 downto 0);
-		  cu_selz : out std_logic_vector(3 downto 0);
-		  z_control : out std_logic_vector(2 downto 0);
-		  selz_control : out std_logic;
-		  selx_control : out std_logic;
+		  cu_selx           : out std_logic_vector(3 downto 0);
+		  cu_selz           : out std_logic_vector(3 downto 0);
+		  z_control         : out std_logic_vector(2 downto 0);
+		  selz_control      : out std_logic;
+		  selx_control      : out std_logic;
 		  
-		  ALU_Opcode : out std_logic_vector(1 downto 0);
-		  CarryIn : out std_logic;
-		  zOut : in std_logic;
+		  ALU_Opcode    : out std_logic_vector(1 downto 0);
+		  CarryIn       : out std_logic;
+		  zOut          : in std_logic;
 		  
-		  IR_AM : in std_logic_vector(1 downto 0);
+		  IR_AM     : in std_logic_vector(1 downto 0);
 		  IR_OpCode : in std_logic_vector(5 downto 0)
     );
 end entity ControlUnit;
 
 architecture behaviour of ControlUnit is
-    type state_type is (T0, T1, T2, R, R_HOLD);
+    type state_type is (T0, T1, T2, R, R_HOLD, Test, Test2, E0, E1,E1bis, E2); --TODO:verifying the additions to the state type
     signal state : state_type := R;
     signal next_state: state_type;
     signal next_state_op: state_type;
@@ -112,7 +116,7 @@ begin
 						
 		  -- EXECUTE
             when T2 =>
-                next_state_op <= T0;
+                next_state_op <= T0; --TODO: Does this need to change? After talking with Daniel
 					 case IR_OpCode is
 						when "000000" =>
 							z_control <= "000";
@@ -121,6 +125,28 @@ begin
 					 end case;
             when R_HOLD =>
                 next_state_op <= T0;
+
+            --Rufaro added more states
+
+        --TESTING STATE 
+            when Test =>
+                if (start) then
+                    clr_start <= 1; --Note: have declared this as output 
+                    next_state_op<= E0;
+                else 
+                    next_state_op <= Test2;
+        --TESTING STATE 2
+            when Test2 =>
+                if (start) then
+                    clr_start <= 1; --Note: have declared this as output  
+                    next_state_op<= E0;
+                else 
+                    next_state_op <= Test;
+        --E0 STATE
+            when E0 =>
+            
+
+
             when others =>
         end case;
         
