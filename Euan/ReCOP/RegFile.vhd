@@ -26,7 +26,8 @@ entity regfile is
 		
 		z_control : in std_logic_vector(2 downto 0);
 		selz_control : in std_logic := 'X';
-		selx_control : in std_logic := 'X'
+		selx_control : in std_logic := 'X';
+		write_en : in std_logic := 'X'
 	);
 	
 end entity regfile;
@@ -59,7 +60,9 @@ begin
 	process (clk)
 	begin
 		if rising_edge(clk) then
-			regs(to_integer(unsigned(selz))) <= z;
+			if write_en = '1' then
+				regs(to_integer(unsigned(selz))) <= z;
+			end if;
 		end if;
 	end process;
 	
