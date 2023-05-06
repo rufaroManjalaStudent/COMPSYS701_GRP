@@ -1,0 +1,28 @@
+
+State Machine - |top|ControlUnit:b2v_inst|state
+Name state.E2 state.E1bis state.E1 state.E0 state.Test2 state.Test state.R_HOLD state.R state.T2 state.T1 state.T0 
+state.T0 0 0 0 0 0 0 0 0 0 0 0 
+state.T1 0 0 0 0 0 0 0 0 0 1 1 
+state.T2 0 0 0 0 0 0 0 0 1 0 1 
+state.R 0 0 0 0 0 0 0 1 0 0 1 
+state.R_HOLD 0 0 0 0 0 0 1 0 0 0 1 
+state.Test 0 0 0 0 0 1 0 0 0 0 1 
+state.Test2 0 0 0 0 1 0 0 0 0 0 1 
+state.E0 0 0 0 1 0 0 0 0 0 0 1 
+state.E1 0 0 1 0 0 0 0 0 0 0 1 
+state.E1bis 0 1 0 0 0 0 0 0 0 0 1 
+state.E2 1 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |top|ControlUnit:b2v_inst|next_state
+Name next_state.E2 next_state.E1bis next_state.E1 next_state.E0 next_state.Test2 next_state.Test next_state.R_HOLD next_state.R next_state.T2 next_state.T1 next_state.T0 
+next_state.T0 0 0 0 0 0 0 0 0 0 0 0 
+next_state.T1 0 0 0 0 0 0 0 0 0 1 1 
+next_state.T2 0 0 0 0 0 0 0 0 1 0 1 
+next_state.R 0 0 0 0 0 0 0 1 0 0 1 
+next_state.R_HOLD 0 0 0 0 0 0 1 0 0 0 1 
+next_state.Test 0 0 0 0 0 1 0 0 0 0 1 
+next_state.Test2 0 0 0 0 1 0 0 0 0 0 1 
+next_state.E0 0 0 0 1 0 0 0 0 0 0 1 
+next_state.E1 0 0 1 0 0 0 0 0 0 0 1 
+next_state.E1bis 0 1 0 0 0 0 0 0 0 0 1 
+next_state.E2 1 0 0 0 0 0 0 0 0 0 1 

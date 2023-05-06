@@ -1,0 +1,10 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+
+entity signalRegisters is
+end entity signalRegisters;
+
+architecture behaviour of signalRegisters is
+begin
+end architecture behaviour;

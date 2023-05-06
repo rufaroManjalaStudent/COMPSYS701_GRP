@@ -15,7 +15,7 @@ entity regfile is
 		rx : in std_logic_vector(15 downto 0);
 		aluout : in std_logic_vector(15 downto 0);
 		rz_max : in std_logic_vector(15 downto 0);
-		--sip_hold : in std_logic_vector(15 downto 0);
+		sip_hold : in std_logic_vector(15 downto 0);
 		--er_temp : in std_logic;
 		--mem_hp_low : in std_logic_vector(6 downto 0);
 		
@@ -38,7 +38,6 @@ architecture behaviour of regfile is
 	signal selx : std_logic_vector(3 downto 0);
 	signal selz : std_logic_vector(3 downto 0);
 	signal z : std_logic_vector(15 downto 0);
-	signal sip_hold : std_logic_vector(15 downto 0) := X"0000";
 	signal er_temp : std_logic := '0';
 	signal mem_hp_low : std_logic_vector(6 downto 0) := "0000000";
 	

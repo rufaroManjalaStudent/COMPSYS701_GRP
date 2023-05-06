@@ -1,6 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
+use ieee.numeric_std.all;
 
 entity memory_interface is
     port (
@@ -55,7 +56,7 @@ begin
     address_a_temp <= temp_address(11 downto 0) when (mem_sel = '0') else address_a_temp;
     address_b_temp <= temp_address(11 downto 0) when (mem_sel = '1') else address_b_temp;
 	 address_a <= address_a_temp;
-    address_b <= address_b_temp;
+    address_b <= std_logic_vector(unsigned(address_b_temp) + 100);
     
     memory_test : memory_block
         port map (

@@ -32,16 +32,15 @@ begin
 						temp_IR <= programMemory_out;
 					end if;
 				end if;
-					--assigning input to separate outputs
+					--assigning input to separate output
 			end if;
 		 end process;
 		 
-		  IR_AM <= temp_IR(15 downto 14);
-		  IR_Opcode <= temp_IR(13 downto 8);
-		  IR_Rz <= temp_IR(7 downto 4);
-		  IR_Rx <= temp_IR(3 downto 0);
-		  
-		  
-		  IR_Op <= programMemory_out(15 downto 0) when (ld_ir2 = '1') else X"0000";
+		 IR_AM <= temp_IR(15 downto 14);
+		 IR_Opcode <= temp_IR(13 downto 8);
+		 IR_Rz <= temp_IR(7 downto 4);
+		 IR_Rx <= temp_IR(3 downto 0);
+		 IR_Op <= programMemory_out(15 downto 0) when (ld_ir2 = '1') else X"0000";
+		 
 end architecture;
 

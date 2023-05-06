@@ -22,16 +22,32 @@ USE ieee.std_logic_1164.all;
 LIBRARY work;
 
 ENTITY top IS 
+	port (CLOCK_50 : in std_logic;
+		  SW : in std_logic_vector(7 downto 0);
+		  LEDR : out std_logic_vector(7 downto 0);
+		  KEY : in std_logic_vector(3 downto 0));
 END top;
 
 ARCHITECTURE bdf_type OF top IS 
 
 signal enable : std_logic := '0';
 
+component signalRegisters
+	port (
+		clk : in std_logic;
+		SIP_in : in std_logic_vector(7 downto 0) := "00000010";
+		SIP_out : out std_logic_vector(15 downto 0);
+		load_sip : in std_logic;
+		load_sop : std_logic;
+		SOP_out : out std_logic_vector(7 downto 0) := "00000000";
+		SOP_in : in std_logic_vector(15 downto 0)
+	);
+end component;
+
 COMPONENT controlunit
 	PORT(clk : IN STD_LOGIC;
 		 reset : IN STD_LOGIC;
-		 enable_pd : in std_logic;
+		 start : IN STD_LOGIC;
 		 zOut : IN STD_LOGIC;
 		 IR_AM : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
 		 IR_OpCode : IN STD_LOGIC_VECTOR(5 DOWNTO 0);
@@ -41,6 +57,8 @@ COMPONENT controlunit
 		 wren_b : OUT STD_LOGIC;
 		 ld_ir1 : OUT STD_LOGIC;
 		 ld_ir2 : out std_logic;
+		 load_sip : out std_logic;
+		 load_sop : out std_logic;
 		 selz_control : OUT STD_LOGIC;
 		 selx_control : OUT STD_LOGIC;
 		 CarryIn : OUT STD_LOGIC;
@@ -94,6 +112,7 @@ GENERIC (width : INTEGER
 		 ir_hold : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
 		 ir_hold_x : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
 		 ir_hold_z : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+		 sip_hold : in std_logic_vector(15 downto 0);
 		 m_out : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
 		 rx : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
 		 rz_max : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
@@ -191,28 +210,45 @@ SIGNAL	SYNTHESIZED_WIRE_43 :  STD_LOGIC;
 signal ld_ir2 : std_logic;
 signal reset : STD_LOGIC := '0';
 signal write_enabled : std_logic;
-
+signal inv_clk : std_logic;
+signal load_sip : std_logic;
+signal load_sop : std_logic;
+signal SIP_out : std_logic_vector(15 downto 0);
 
 BEGIN 
 
 
-clk_gen : process
-begin
-	SYNTHESIZED_WIRE_46 <= not SYNTHESIZED_WIRE_46;
-	wait for 20 ns;
-end process clk_gen;
+--clk_gen : process
+--begin
+--	SYNTHESIZED_WIRE_46 <= not SYNTHESIZED_WIRE_46;
+--	wait for 20 ns;
+--end process clk_gen;
 
-reset_proc : process
-begin
-	wait for 40 ns;
-	enable <= '1';
-	wait;
-end process reset_proc;
+inv_clk <= not CLOCK_50;
+
+--reset_proc : process
+--begin
+--	wait for 40 ns;
+--	enable <= '1';
+--	wait;
+--end process reset_proc;
+
+signal_registers : signalRegisters
+port map (
+	clk => CLOCK_50,
+	SIP_in => SW,
+	SIP_out => SIP_out,
+	load_sip => load_sip,
+	load_sop => load_sop,
+	SOP_out => LEDR,
+	SOP_in  => SYNTHESIZED_WIRE_50
+);
+
 
 b2v_inst : controlunit
-PORT MAP(clk => SYNTHESIZED_WIRE_46,
-		reset => reset,
-		enable_pd => enable,
+PORT MAP(clk => CLOCK_50,
+		reset => KEY(0),
+		start => KEY(3),
 		 zOut => SYNTHESIZED_WIRE_1,
 		 IR_AM => SYNTHESIZED_WIRE_47,
 		 IR_OpCode => SYNTHESIZED_WIRE_3,
@@ -222,6 +258,8 @@ PORT MAP(clk => SYNTHESIZED_WIRE_46,
 		 wren_b => SYNTHESIZED_WIRE_29,
 		 ld_ir1 => SYNTHESIZED_WIRE_11,
 		 ld_ir2 => ld_ir2,
+		 load_sip => load_sip,
+		 load_sop => load_sop,
 		 selz_control => SYNTHESIZED_WIRE_14,
 		 selx_control => SYNTHESIZED_WIRE_15,
 		 CarryIn => SYNTHESIZED_WIRE_35,
@@ -235,7 +273,7 @@ PORT MAP(clk => SYNTHESIZED_WIRE_46,
 
 
 b2v_inst2 : pc
-PORT MAP(clk => SYNTHESIZED_WIRE_46,
+PORT MAP(clk => CLOCK_50,
 		reset => reset,
 		 pc_control_sig => SYNTHESIZED_WIRE_5,
 		 ir_hold => SYNTHESIZED_WIRE_48,
@@ -246,7 +284,7 @@ PORT MAP(clk => SYNTHESIZED_WIRE_46,
 
 
 b2v_inst3 : ir
-PORT MAP(clk => SYNTHESIZED_WIRE_46,
+PORT MAP(clk => CLOCK_50,
 		reset => reset,
 		 ld_ir1 => SYNTHESIZED_WIRE_11,
 		 ld_ir2 => ld_ir2,
@@ -261,7 +299,7 @@ PORT MAP(clk => SYNTHESIZED_WIRE_46,
 b2v_inst4 : regfile
 GENERIC MAP(width => 4
 			)
-PORT MAP(clk => SYNTHESIZED_WIRE_46,
+PORT MAP(clk => CLOCK_50,
 		 selz_control => SYNTHESIZED_WIRE_14,
 		 selx_control => SYNTHESIZED_WIRE_15,
 		 aluout => SYNTHESIZED_WIRE_16,
@@ -273,6 +311,7 @@ PORT MAP(clk => SYNTHESIZED_WIRE_46,
 		 m_out => SYNTHESIZED_WIRE_49,
 		 rx => SYNTHESIZED_WIRE_50,
 		 rz_max => SYNTHESIZED_WIRE_24,
+		 sip_hold => SIP_out,
 		 z_control => SYNTHESIZED_WIRE_25,
 		 flmr => SYNTHESIZED_WIRE_37,
 		 rx_out => SYNTHESIZED_WIRE_50,
@@ -281,7 +320,7 @@ PORT MAP(clk => SYNTHESIZED_WIRE_46,
 
 
 b2v_inst5 : memory_interface
-PORT MAP(clock => SYNTHESIZED_WIRE_46,
+PORT MAP(clock => inv_clk,
 		 data_in_control => SYNTHESIZED_WIRE_27,
 		 mem_sel => SYNTHESIZED_WIRE_28,
 		 wren_b => SYNTHESIZED_WIRE_29,
@@ -313,7 +352,7 @@ PORT MAP(cin => SYNTHESIZED_WIRE_35,
 
 
 b2v_inst8 : zregister
-PORT MAP(clk => SYNTHESIZED_WIRE_46,
+PORT MAP(clk => CLOCK_50,
 		 in_z => SYNTHESIZED_WIRE_43,
 		 out_z => SYNTHESIZED_WIRE_1);
 

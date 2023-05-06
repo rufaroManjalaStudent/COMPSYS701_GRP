@@ -72,7 +72,7 @@ BEGIN
 		clock_enable_output_a => "BYPASS",
 		clock_enable_output_b => "BYPASS",
 		indata_reg_b => "CLOCK0",
-		init_file => "C:\Users\euanp\Documents\GitHub\COMPSYS701_GRP\Euan\ReCOP\testing.mif",
+		init_file => "C:\Users\epik990\Documents\compsys701\testing.mif",
 		intended_device_family => "Cyclone V",
 		lpm_type => "altsyncram",
 		numwords_a => 4096,
