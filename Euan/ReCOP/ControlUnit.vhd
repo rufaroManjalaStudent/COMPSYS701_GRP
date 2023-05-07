@@ -7,7 +7,8 @@ entity ControlUnit is
     port (
         clk : in std_logic;
         reset : in std_logic;
-		  start : in std_logic;
+		start : in std_logic;
+        dprr : in std_logic;
         pc_control_sig : out std_logic;
         pc_mux_select : out std_logic_vector(1 downto 0);
 		  data_in_control : out std_logic;
@@ -41,7 +42,10 @@ architecture behaviour of ControlUnit is
     signal next_state: state_type;
     signal next_state_op: state_type;
     signal clear_pd : std_logic := 'X';
-	 signal enable_pd : std_logic := '0';
+	signal enable_pd : std_logic := '0';
+
+    signal dpc : std_logic :='X'; --ReCop outputs these two signals so will need signals to read values for states (Refer to flowchart)
+    signal irq : std_logic :='0';
 begin
 
     resetprocessor : process (clk, reset)
@@ -215,20 +219,28 @@ begin
             when R_HOLD =>
                 next_state_op <= Test;
 					 
-				when Test =>
-					if (start = '0') then
-						next_state_op <= T0;
-					else 
-						next_state_op <= Test2;
-					end if;
-				when Test2 =>
-					if (start = '0') then
-						next_state_op <= T0;
-					else 
-						next_state_op <= Test;
-					end if;
-					
-				when E0 =>
+            when Test =>
+                if (start = '1') then
+                    next_state_op <= E0;
+                else 
+                    next_state_op <= Test2;
+                end if;
+
+            when Test2 =>
+                if (start = '1') then
+                    next_state_op <= E0;
+                else 
+                    next_state_op <= Test;
+                end if;
+                
+            when E0 =>
+                if(dpc = '1' and irq ='1') then 
+                elsif(dpc ='0' and irq ='0') then
+                else
+                    
+            when E1 =>
+            when E2 =>
+
 					
             when others =>
         end case;
