@@ -48,6 +48,7 @@ COMPONENT controlunit
 	PORT(clk : IN STD_LOGIC;
 		 reset : IN STD_LOGIC;
 		 start : IN STD_LOGIC;
+		 debug : in std_logic;
 		 zOut : IN STD_LOGIC;
 		 IR_AM : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
 		 IR_OpCode : IN STD_LOGIC_VECTOR(5 DOWNTO 0);
@@ -135,7 +136,7 @@ COMPONENT memory_interface
 		 rx : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
 		 rz : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
 		 data_memory : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
-		 program_memory : OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
+		 program_memory_out : OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
 	);
 END COMPONENT;
 
@@ -177,7 +178,7 @@ COMPONENT max
 	);
 END COMPONENT;
 
-SIGNAL	SYNTHESIZED_WIRE_46 :  STD_LOGIC := '0';
+--SIGNAL	CLOCK_50 :  STD_LOGIC := '0';
 SIGNAL	SYNTHESIZED_WIRE_1 :  STD_LOGIC;
 SIGNAL	SYNTHESIZED_WIRE_47 :  STD_LOGIC_VECTOR(1 DOWNTO 0);
 SIGNAL	SYNTHESIZED_WIRE_3 :  STD_LOGIC_VECTOR(5 DOWNTO 0);
@@ -214,13 +215,17 @@ signal inv_clk : std_logic;
 signal load_sip : std_logic;
 signal load_sop : std_logic;
 signal SIP_out : std_logic_vector(15 downto 0);
+--
+--signal SW : std_logic_vector(7 downto 0) := (others => '0');
+--signal LEDR : std_logic_vector(7 downto 0);
+--signal KEY : std_logic_vector(3 downto 0) := (others => '1');
 
 BEGIN 
 
 
 --clk_gen : process
 --begin
---	SYNTHESIZED_WIRE_46 <= not SYNTHESIZED_WIRE_46;
+--	CLOCK_50 <= not CLOCK_50;
 --	wait for 20 ns;
 --end process clk_gen;
 
@@ -229,9 +234,51 @@ inv_clk <= not CLOCK_50;
 --reset_proc : process
 --begin
 --	wait for 40 ns;
---	enable <= '1';
+--	KEY(0) <= '0';
+--	wait for 200 ns;
+--	KEY(0) <= '1';
 --	wait;
 --end process reset_proc;
+--
+--start_proc : process
+--begin
+--	wait for 300 ns;
+--	KEY(3) <= '0';
+--	wait for 500 ns;
+--	KEY(3) <= '1';
+--	wait for 200 ns;
+--	KEY(3) <= '0';
+--	wait for 500 ns;
+--	KEY(3) <= '1';
+--	wait for 200 ns;
+--	KEY(3) <= '0';
+--	wait for 500 ns;
+--	KEY(3) <= '1';
+--	wait for 200 ns;
+--	KEY(3) <= '0';
+--	wait for 500 ns;
+--	KEY(3) <= '1';
+--	wait for 200 ns;
+--	KEY(3) <= '0';
+--	wait for 500 ns;
+--	KEY(3) <= '1';
+--	wait for 200 ns;
+--	KEY(3) <= '0';
+--	wait for 500 ns;
+--	KEY(3) <= '1';
+--	wait;
+--end process start_proc;
+--
+--SW_sim : process
+--begin
+--	wait for 300 ns;
+--	SW <= "00000001";
+--	wait for 200 ns;
+--	SW <= "00000011";
+--	wait for 1000 ns;
+--	SW <= "10000000";
+--	wait;
+--end process SW_sim;
 
 signal_registers : signalRegisters
 port map (
@@ -248,7 +295,8 @@ port map (
 b2v_inst : controlunit
 PORT MAP(clk => CLOCK_50,
 		reset => KEY(0),
-		start => KEY(3),
+		start => KEY(1),
+		debug => KEY(3),
 		 zOut => SYNTHESIZED_WIRE_1,
 		 IR_AM => SYNTHESIZED_WIRE_47,
 		 IR_OpCode => SYNTHESIZED_WIRE_3,
@@ -330,7 +378,7 @@ PORT MAP(clock => inv_clk,
 		 rx => SYNTHESIZED_WIRE_50,
 		 rz => SYNTHESIZED_WIRE_51,
 		 data_memory => SYNTHESIZED_WIRE_49,
-		 program_memory => SYNTHESIZED_WIRE_12);
+		 program_memory_out => SYNTHESIZED_WIRE_12);
 
 
 b2v_inst7 : alu

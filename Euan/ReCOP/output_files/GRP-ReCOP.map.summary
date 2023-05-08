@@ -1,13 +1,13 @@
-Analysis & Synthesis Status : Successful - Sat May 06 20:42:19 2023
-Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Standard Edition
+Analysis & Synthesis Status : Successful - Mon May 08 08:12:46 2023
+Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 Revision Name : GRP-ReCOP
 Top-level Entity Name : top
 Family : Cyclone V
 Logic utilization (in ALMs) : N/A
-Total registers : 115
+Total registers : 1079
 Total pins : 21
 Total virtual pins : 0
-Total block memory bits : 66,048
+Total block memory bits : 71,424
 Total DSP Blocks : 0
 Total HSSI RX PCSs : 0
 Total HSSI PMA RX Deserializers : 0

@@ -16,7 +16,7 @@ entity memory_interface is
         mem_sel : in std_logic := 'X';
         wren_b : in std_logic := '0';
         
-        program_memory : out std_logic_vector(15 downto 0);
+        program_memory_out : out std_logic_vector(15 downto 0);
         data_memory : out std_logic_vector(15 downto 0)
     );
 end entity memory_interface;
@@ -29,20 +29,13 @@ architecture behaviour of memory_interface is
     signal address_b : std_logic_vector(11 downto 0);
     signal data_b : std_logic_vector(15 downto 0);
     
-    component memory_block
+    component program_memory
         port (
-            address_a      : in std_logic_vector (11 DOWNTO 0) := (others => '0');
-            address_b      : in std_logic_vector (11 DOWNTO 0) := (others => '0');
-            clock      : in std_logic  := '1';
-            data_a      : in std_logic_vector (15 DOWNTO 0) := (others => 'X');
-            data_b      : in std_logic_vector (15 DOWNTO 0);
-            wren_a      : in std_logic  := '0';
-            wren_b      : in std_logic  := '0';
-            q_a     : out std_logic_vector (15 DOWNTO 0);
-            q_b     : out std_logic_vector (15 DOWNTO 0)
+            address		: IN STD_LOGIC_VECTOR (11 DOWNTO 0);
+				clock		: IN STD_LOGIC;
+				q		: OUT STD_LOGIC_VECTOR (15 DOWNTO 0)
         );
-    end component memory_block;
-    
+    end component program_memory;
 begin
 
     data_b <= ir_hold when (data_in_control = '0') else
@@ -56,19 +49,13 @@ begin
     address_a_temp <= temp_address(11 downto 0) when (mem_sel = '0') else address_a_temp;
     address_b_temp <= temp_address(11 downto 0) when (mem_sel = '1') else address_b_temp;
 	 address_a <= address_a_temp;
-    address_b <= std_logic_vector(unsigned(address_b_temp) + 100);
+    address_b <= address_b_temp;
     
-    memory_test : memory_block
+    memory_test : program_memory
         port map (
-            address_a => address_a,
-            address_b => address_b,
+            address => address_a,
             clock => clock,
-            data_a => open,
-            data_b => data_b,
-            wren_a => open,
-            wren_b => wren_b,
-            q_a => program_memory, -- Assign outputs directly to the output signals
-            q_b => data_memory      -- Assign outputs directly to the output signals
+				q => program_memory_out -- Assign outputs directly to the output signals
         );
         
 end architecture behaviour;

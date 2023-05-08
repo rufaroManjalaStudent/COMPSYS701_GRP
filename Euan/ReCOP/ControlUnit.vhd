@@ -7,8 +7,9 @@ entity ControlUnit is
     port (
         clk : in std_logic;
         reset : in std_logic;
-		start : in std_logic;
-        dprr : in std_logic;
+		  start : in std_logic;
+		  debug : in std_logic;
+--        dprr : in std_logic;
         pc_control_sig : out std_logic;
         pc_mux_select : out std_logic_vector(1 downto 0);
 		  data_in_control : out std_logic;
@@ -42,7 +43,8 @@ architecture behaviour of ControlUnit is
     signal next_state: state_type;
     signal next_state_op: state_type;
     signal clear_pd : std_logic := 'X';
-	signal enable_pd : std_logic := '0';
+	 signal enable_pd : std_logic := '0';
+	 signal clr_start : std_logic := '0';
 
     signal dpc : std_logic :='X'; --ReCop outputs these two signals so will need signals to read values for states (Refer to flowchart)
     signal irq : std_logic :='0';
@@ -61,7 +63,6 @@ begin
                 flipflop := '0';
                 enable_pd <= '1';
                 clear_pd <= '0';
-                next_state <= R_HOLD;
             end if;
             
             if flipflop = '1' then
@@ -76,13 +77,9 @@ begin
     begin
         if rising_edge(clk) then
             if clear_pd = '1' then
-                state <= T0;
+                state <= R_HOLD;
             elsif enable_pd = '1' then
-                if state = R then
-                    state <= R_HOLD;
-                else
-                    state <= next_state_op;
-                end if;
+                state <= next_state_op;
             end if;
         end if;
     end process pulsedistributor;
@@ -96,6 +93,10 @@ begin
 		  ld_ir2 <= '0'; write_en <= '0';
 		  data_in_control <= '0'; wren_b <= '0';
 		  load_sip <= '0'; load_sop <= '0';
+		  
+		  if rising_edge(start) then
+				clr_start <= '1';
+			end if;
 								        
         case state is
 		  -- FETCH
@@ -130,7 +131,12 @@ begin
 						
 		  -- EXECUTE
             when T2 =>
-                next_state_op <= Test;
+					 if (debug = '1') then
+						next_state_op <= Test;
+					 else
+						next_state_op <= T0;
+					 end if;
+					 clr_start <= '0';
 					 case IR_AM is
 						when "00" => -- Inherent
 						when "01" => -- Immediate 
@@ -153,8 +159,8 @@ begin
 									selz_control <= '0';
 									write_en <= '1';
 								when "011000" => -- JMP
-									ld_ir2 <= '1';
 									pc_mux_select <= "10";
+									pc_control_sig <= '1';
 								when "111000" =>	-- ADD
 									ld_ir2 <= '1';
 									ALU_Opcode <= "00";
@@ -220,23 +226,23 @@ begin
                 next_state_op <= Test;
 					 
             when Test =>
-                if (start = '1') then
-                    next_state_op <= E0;
+                if (clr_start = '1') then
+                    next_state_op <= T0;
                 else 
                     next_state_op <= Test2;
                 end if;
 
             when Test2 =>
-                if (start = '1') then
-                    next_state_op <= E0;
+                if (clr_start = '1') then
+                    next_state_op <= T0;
                 else 
                     next_state_op <= Test;
                 end if;
                 
             when E0 =>
-                if(dpc = '1' and irq ='1') then 
-                elsif(dpc ='0' and irq ='0') then
-                else
+--                if(dpc = '1' and irq ='1') then 
+--                elsif(dpc ='0' and irq ='0') then
+--                else
                     
             when E1 =>
             when E2 =>

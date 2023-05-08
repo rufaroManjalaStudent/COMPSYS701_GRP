@@ -1,12 +1,14 @@
-DEPTH = 32;               -- The size of memory in words
+DEPTH = 4096;               -- The size of memory in words
 WIDTH = 16;               -- The width of memory in bits
 ADDRESS_RADIX = DEC;      -- The radix for address values
 DATA_RADIX = HEX;         -- The radix for data values
 
 CONTENT
 BEGIN
-0 : 4010;                 -- word 0
-1 : 0014;                 -- word 1
-2 : 4821;
-3 : FFEB;
+0 : 0000;                 -- word 0
+1 : F710;                 -- LSIP Rx
+2 : FA01;				 -- SSOP RZ
+3 :	5800;
+4 : 0000;
+[5..4095] : 0000;
 END;

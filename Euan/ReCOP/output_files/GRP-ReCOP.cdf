@@ -1,4 +1,4 @@
-/* Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Standard Edition */
+/* Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition */
 JedecChain;
 	FileRevision(JESD32A);
 	DefaultMfr(6E);
@@ -6,7 +6,7 @@ JedecChain;
 	P ActionCode(Ign)
 		Device PartName(SOCVHPS) MfrSpec(OpMask(0));
 	P ActionCode(Cfg)
-		Device PartName(5CSEMA5F31) Path("C:/Users/epik990/OneDrive - The University of Auckland/Documents/GitHub/COMPSYS701_GRP/Euan/ReCOP/output_files/") File("GRP-ReCOP.sof") MfrSpec(OpMask(1));
+		Device PartName(5CSEMA5F31) Path("C:/Users/euanp/Documents/GitHub/COMPSYS701_GRP/Euan/ReCOP/output_files/") File("GRP-ReCOP.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 

@@ -20,7 +20,8 @@ entity IR is
 end entity IR;
 
 architecture behaviour of IR is
-	signal temp_IR : std_logic_vector(15 downto 0) := (others => '0');	
+	signal temp_IR : std_logic_vector(15 downto 0) := (others => '0');
+   signal temp_IR_Op : std_logic_vector(15 downto 0) := (others => '0');
 begin
 		  process (clk)
 		  begin
@@ -30,6 +31,8 @@ begin
 				else
 					if (ld_ir1 = '1') then
 						temp_IR <= programMemory_out;
+					else
+						temp_IR_Op <= programMemory_out;
 					end if;
 				end if;
 					--assigning input to separate output
@@ -40,7 +43,7 @@ begin
 		 IR_Opcode <= temp_IR(13 downto 8);
 		 IR_Rz <= temp_IR(7 downto 4);
 		 IR_Rx <= temp_IR(3 downto 0);
-		 IR_Op <= programMemory_out(15 downto 0) when (ld_ir2 = '1') else X"0000";
+		 IR_Op <= temp_IR_Op;
 		 
 end architecture;
 
