@@ -64,7 +64,7 @@ begin
 					-- Enable DAC channel 0
 					when 9 =>
 						send.addr <= x"01";
-						send.data <= x"b1020000";
+						send.data <= x"b1020000"; 
 						state := 8;
 
 					-- Enable DAC channel 1

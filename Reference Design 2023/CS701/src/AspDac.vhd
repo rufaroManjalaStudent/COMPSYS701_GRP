@@ -59,7 +59,7 @@ begin
 					data <= (others => '0');
 				else
 					case rate_0 is
-						when "11"   => tick_0 := x"ff";
+						when "11"   => tick_0 := x"ff"; --setting sampling rate tick value, will not
 						when "10"   => tick_0 := x"0f";
 						when "01"   => tick_0 := x"03";
 						when others => tick_0 := x"00";
@@ -67,7 +67,7 @@ begin
 					put <= '1';
 					data <= recv.data(16 downto 0);
 				end if;
-			elsif recv.data(31 downto 28) = "1000" and recv.data(16) = '1' and enable_1 = '1' then
+			elsif recv.data(31 downto 28) = "1000" and recv.data(16) = '1' and enable_1 = '1' then --if audio is for the right channel
 				if tick_1 /= 0 then
 					tick_1 := tick_1 - 1;
 					put <= '0';
@@ -80,7 +80,7 @@ begin
 						when others => tick_1 := x"00";
 					end case;
 					put <= '1';
-					data <= recv.data(16 downto 0);
+					data <= recv.data(16 downto 0); --send the value that is now received at this point of clock tick as it is the one being sampled at rate
 				end if;
 			else
 				put <= '0';
