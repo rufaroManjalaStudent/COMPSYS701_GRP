@@ -55,10 +55,17 @@ begin
 					else
 						enable_1 <= recv.data(17); --assigning values to right channel settings
 					end if;
+
+					case recv.data(19 downto 18) is  --using what was formerly used for setting the sampling rate
+						when "00" => detect <= "00"; --no detection mode
+						when "01" => detect <= "01"; --negative peak detection mode
+						when "10" => detect <= "10"; --positive peak detection mode
+						when others => detect <= detect; --keep the current value
+					end case;
+
 				end if;
 
-				-- TODO : Add some configuration options using bits 19 downto 16. instruction format is "1001", this will come from ReCop
-				-- TODO: Options to include: a) peak detection b)negative peak detection (smallest value) c)none
+				
 
 			end if;
 	end process;
@@ -99,7 +106,7 @@ begin
 						end if;
 
 					else
-						hexn <= x"C18306"; --setting all the segs to simply show an dash symbol
+						hexn <= x"C18306"; --setting all the segs to simply show an error symbol
 					end if;
 				end if;
 			end if;
