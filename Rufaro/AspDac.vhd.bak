@@ -5,12 +5,14 @@ library ieee;
 use ieee.numeric_std.all;
 use ieee.std_logic_1164.all;
 library work;
-UNCOMMMENT use work.TdmaMinTypes.all;
+--UNCOMMMENT use work.TdmaMinTypes.all;
 
 entity AspDac is
 	--TODO: Add a generic for minimum difference, so that different peak sharpness are counted as a peak. can use % operation to keep cycling through array
 	generic(
-		MIN_DROP: integer range 0 to 10 := 5 --minimum difference to be considered the peak
+		ARRAY_LEN: integer range 0 to 3 := 3 ; --length of the array to hold the points
+		MIDDLE: integer := "10"; --middle point of array
+		MIN_DROP: integer := "101" --minimum difference to be considered the peak
 	);
 	
 	port (
@@ -24,20 +26,20 @@ entity AspDac is
 		hex2  : out std_logic_vector(6 downto 0);
 		hex3  : out std_logic_vector(6 downto 0);
 		hex4  : out std_logic_vector(6 downto 0);
-		hex5  : out std_logic_vector(6 downto 0)
+		hex5  : out std_logic_vector(6 downto 0);
 
-		UNCOMMENT send  : out tdma_min_port; --tdma port connection to the whole design
-		UNCOMMENT recv  : in  tdma_min_port
+		send  : out tdma_min_port; --tdma port connection to the whole design
+		recv  : in  tdma_min_port
 	);
 end entity;
 
 architecture rtl of AspDac is
 
     --||SIGNALS & TYPES||
-    signal hexn 	: unsigned(23 downto 0) 		:= x"000000";
-	signal enable_0 : std_logic 					:= '0'; --bits for checking if channel 0 of the DAC is enabled
-	signal enable_1 : std_logic 					:= '0';
-	signal detect	: std_logic_vector(1 downto 0) 	:= "00";
+    signal hexn : unsigned(23 downto 0) := x"000000";
+	signal enable_0 : std_logic := '0'; --bits for checking if channel 0 of the DAC is enabled
+	signal enable_1 : std_logic := '0';
+	signal detect: std_logic_vector(1 downto 0) := "00";
 
 begin
 	--||CONCURRENT STATEMENTS||
@@ -88,32 +90,32 @@ begin
 
 	process (clock) --peak detection
 		variable value : unsigned(23 downto 0) := x"000000";
-		variable ascend : boolean := true; --for checking if numbers are going up or down. 1 means rising
+		variable ascend : boolean := 1; --for checking if numbers are going up or down. 1 means rising
 		begin
 			if rising_edge(clock)then
 				if recv.data(31 downto 28) = "1000" and recv.data(16) = '0' and (enable_0 = '1' or enable_1 = '1') then --if audio data is being received
 					--no detection	
 					if detect = "00" then 
-							hexn <= x"000000"; --will be zero if no detection  set
+							hexn <= x"7EFDFBF"; --setting all the segs to simply show a dash symbol
 						
 					elsif detect = "01" then --negative peak detect
 						if unsigned(recv.data(15 downto 0)) <= value then
 							value := unsigned(recv.data(15 downto 0));
-							ascend := false; --signifying that the signal is going down 
+							ascend := 0; --signifying that the signal is going down 
 						elsif (unsigned(recv.data(15 downto 0)) > value) and ((unsigned(recv.data(15 downto 0)) - value) >= MIN_DROP) and (not ascend)  then --checking that the next point is rising up enough to make current value the peak 
 							hexn <= value;
 							value := unsigned(recv.data(15 downto 0)); --continuing on
-							ascend := true;
+							ascend := 1;
 						end if;
 
 					elsif detect = "10" then -- positive peak detect
 						if unsigned(recv.data(15 downto 0)) >= value then
 							value := unsigned(recv.data(15 downto 0));
-							ascend := true; --signifying that the signal is going up 
+							ascend := 1; --signifying that the signal is going up 
 						elsif (unsigned(recv.data(15 downto 0)) < value) and ((value - unsigned(recv.data(15 downto 0))) >= MIN_DROP) and (ascend)  then --checking that the next point is rising up enough to make current value the peak 
 							hexn <= value;
 							value := unsigned(recv.data(15 downto 0)); --continuing on
-							ascend := false;
+							ascend := 0;
 						end if;
 					else
 						hexn <= x"eeeeee"; --setting all the segs to simply show an error symbol
