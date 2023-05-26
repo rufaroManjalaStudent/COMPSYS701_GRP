@@ -5,7 +5,7 @@ library ieee;
 use ieee.numeric_std.all;
 use ieee.std_logic_1164.all;
 library work;
-UNCOMMMENT use work.TdmaMinTypes.all;
+use work.TdmaMinTypes.all;
 
 entity AspDac is
 	--TODO: Add a generic for minimum difference, so that different peak sharpness are counted as a peak. can use % operation to keep cycling through array
@@ -24,10 +24,10 @@ entity AspDac is
 		hex2  : out std_logic_vector(6 downto 0);
 		hex3  : out std_logic_vector(6 downto 0);
 		hex4  : out std_logic_vector(6 downto 0);
-		hex5  : out std_logic_vector(6 downto 0)
+		hex5  : out std_logic_vector(6 downto 0);
 
-		UNCOMMENT send  : out tdma_min_port; --tdma port connection to the whole design
-		UNCOMMENT recv  : in  tdma_min_port
+		send  : out tdma_min_port; --tdma port connection to the whole design
+		recv  : in  tdma_min_port
 	);
 end entity;
 
