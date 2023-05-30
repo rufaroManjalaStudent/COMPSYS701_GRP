@@ -5,21 +5,21 @@ library ieee;
 use ieee.numeric_std.all;
 use ieee.std_logic_1164.all;
 library work;
-use work.TDMASuite.all;
+use work.TdmaMinTypes.all;
 
 entity AspDac is
 	--TODO: Add a generic for minimum difference, so that different peak sharpness are counted as a peak. can use % operation to keep cycling through array
 	generic(
-		MIN_DROP: integer range 0 to 10 := 0 --minimum difference to be considered the peak
+		MIN_DROP: integer range 0 to 10 := 5 --minimum difference to be considered the peak
 	);
 	
 	port (
 		clock : in  std_logic;
 		--full  : in  std_logic;
 		put   : out std_logic; --assuming this value enables the fifo to add the new data from the DAC
-		data  : out std_logic_vector(16 downto 0); --data to be manipulated and put on the sender for tdma	
+		data  : out std_logic_vector(16 downto 0); --data to be manipulated and put on the sender for tdma
 
-		hex0  : out std_logic_vector(6 downto 0); --ports to enable the displaying of the value found on the fpga board
+        hex0  : out std_logic_vector(6 downto 0); --ports to enable the displaying of the value found on the fpga board
 		hex1  : out std_logic_vector(6 downto 0);
 		hex2  : out std_logic_vector(6 downto 0);
 		hex3  : out std_logic_vector(6 downto 0);
@@ -34,11 +34,10 @@ end entity;
 architecture rtl of AspDac is
 
     --||SIGNALS & TYPES||
-    	signal hexin 	: std_logic_vector(23 downto 0); 		--:= x"aaaaaa";
+    signal hexn 	: unsigned(23 downto 0) 		:= x"000000";
 	signal enable_0 : std_logic 					:= '0'; --bits for checking if channel 0 of the DAC is enabled
 	signal enable_1 : std_logic 					:= '0';
 	signal detect	: std_logic_vector(1 downto 0) 	:= "00";
-	signal test	: std_logic_vector(1 downto 0) := "00"; --DELETE THIS SIGNAL, only for debugging where the code is not entering
 
 begin
 	--||CONCURRENT STATEMENTS||
@@ -91,42 +90,41 @@ begin
 
 	process (clock) --peak detection
 		variable value : unsigned(23 downto 0) := x"000000";
-		variable ascend : boolean := false; --for checking if numbers are going up or down. 1 means rising
+		variable ascend : boolean := true; --for checking if numbers are going up or down. 1 means rising
 		begin
 			if rising_edge(clock)then
-				if recv.data(31 downto 28) = "1000" and (enable_0 = '1' or enable_1 = '1') then --if audio data is being received
+				if recv.data(31 downto 28) = "1000" and recv.data(16) = '0' and (enable_0 = '1' or enable_1 = '1') then --if audio data is being received
 					--no detection	
-					
 					if detect = "00" then 
-							hexin <= x"000000"; --will be zero if no detection  set
+							hexn <= x"000000"; --will be zero if no detection  set
 						
 					elsif detect = "01" then --negative peak detect
-						if ("00000000"&unsigned(recv.data(15 downto 0))) <= value then
-							value := "00000000"&unsigned(recv.data(15 downto 0));
+						if unsigned(recv.data(15 downto 0)) <= value then
+							value := unsigned(recv.data(15 downto 0));
 							ascend := false; --signifying that the signal is going down 
-						elsif (("00000000"&unsigned(recv.data(15 downto 0))) > value) and (("00000000"&unsigned(recv.data(15 downto 0)) - value) >= MIN_DROP) and (not ascend)  then --checking that the next point is rising up enough to make current value the peak 
-							hexin <= std_logic_vector(value);
-							value := "00000000"&unsigned(recv.data(15 downto 0)); --continuing on
-							ascend := true;						
+						elsif (unsigned(recv.data(15 downto 0)) > value) and ((unsigned(recv.data(15 downto 0)) - value) >= MIN_DROP) and (not ascend)  then --checking that the next point is rising up enough to make current value the peak 
+							hexn <= value;
+							value := unsigned(recv.data(15 downto 0)); --continuing on
+							ascend := true;
 						end if;
 
 					elsif detect = "10" then -- positive peak detect
-						if ("00000000"&unsigned(recv.data(15 downto 0))) >= value then
-							value := "00000000"&unsigned(recv.data(15 downto 0));
+						if unsigned(recv.data(15 downto 0)) >= value then
+							value := unsigned(recv.data(15 downto 0));
 							ascend := true; --signifying that the signal is going up 
-							test <= "11";
-						elsif ("00000000"&(unsigned(recv.data(15 downto 0))) < value) and ((value - ("00000000"&unsigned(recv.data(15 downto 0)))) >= MIN_DROP) and (ascend)  then --checking that the next point is rising up enough to make current value the peak 
-							hexin <= std_logic_vector(value);
-							value := "00000000"&unsigned(recv.data(15 downto 0)); --continuing on
+						elsif (unsigned(recv.data(15 downto 0)) < value) and ((value - unsigned(recv.data(15 downto 0))) >= MIN_DROP) and (ascend)  then --checking that the next point is rising up enough to make current value the peak 
+							hexn <= value;
+							value := unsigned(recv.data(15 downto 0)); --continuing on
 							ascend := false;
-							test <= "10";	
 						end if;
 					else
-						hexin <= x"eeeeee"; --setting all the segs to simply show an error symbol
+						hexn <= x"eeeeee"; --setting all the segs to simply show an error symbol
 				
 					end if;
 				end if;
 			end if;
+			
+
 	end process;
 
 
@@ -135,7 +133,7 @@ begin
 
     hs6 : entity work.HexSeg6
 	port map (
-		hexn => hexin,
+		hexn => std_logic_vector(hexn),
 		seg0 => hex0,
 		seg1 => hex1,
 		seg2 => hex2,
